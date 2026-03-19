@@ -35,11 +35,12 @@ function StepThree({ formData }) {
                 customer_phone: formData.phoneNo
             }, { withCredentials: true });
 
-            const { payment_session_id } = response.data;
+           const payment_session_id = response.data?.data?.payment_session_id;
 
-            if (!payment_session_id) {
-                throw new Error("No session ID received");
-            }
+         if (!payment_session_id) {
+    console.log("FULL RESPONSE:", response.data);
+    throw new Error("No session ID received");
+          }
 
             // 2. Cashfree Checkout launch karna
             const checkoutOptions = {
