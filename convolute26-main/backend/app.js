@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://mlcoe.tech",
     credentials:true
 }))
 
@@ -29,9 +29,10 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: false,
+            secure: true,
             httpOnly: true,
-            maxAge: 5 * 60 *60* 1000, // 5 minutes
+            maxAge: 5 * 60 *60* 1000,
+            sameSite:"None" // 5 minutes
         },
     })
 );

@@ -6,7 +6,6 @@ const studentSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      unique:true,
       minlength: [2, "Name must be at least 3 characters long"],
       maxlength: 50,
       match: [
