@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import backArrow from "../assets/backarrow1.svg"
 import logo from "../assets/mlcoelogo1.svg"
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 function FourthPage({ formData, updateData }) {
   // Master state se initial value pick karna
@@ -19,7 +18,7 @@ function FourthPage({ formData, updateData }) {
       updateData({ year: yearInt });
       navigate("/branch");
     } else {
-      toast.error("Please select your year");
+      alert("Please select your year");
     }
   };
 

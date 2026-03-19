@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../assets/backarrow1.svg";
 import logo from "../assets/mlcoelogo1.svg";
-import { toast } from "react-toastify";
 
 function Living({ formData, updateData }) {
   // Backend Enum values: "Hosteller" aur "Day Scholar"
@@ -14,7 +13,7 @@ function Living({ formData, updateData }) {
       updateData({ residence: livingType });
       navigate("/steptwo");
     } else {
-      toast.error("Please select your residence type");
+      alert("Please select your residence type");
     }
   };
 

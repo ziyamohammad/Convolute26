@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../assets/backarrow1.svg";
 import logo from "../assets/mlcoelogo1.svg";
-import { toast } from "react-toastify";
 
 function Branch({ formData, updateData }) {
   // Initialize state with existing value from formData if user comes back to this page
@@ -25,7 +24,7 @@ function Branch({ formData, updateData }) {
       updateData({ branch: selectedBranch });
       navigate("/gender");
     } else {
-      toast.error("Please select your branch");
+      alert("Please select your branch");
     }
   };
 

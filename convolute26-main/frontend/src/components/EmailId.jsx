@@ -3,7 +3,6 @@ import backArrow from "../assets/backarrow1.svg";
 import logo from "../assets/mlcoelogo1.svg";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
 axios.defaults.withCredentials = true;
 
@@ -30,10 +29,10 @@ function EmailId({ formData, updateData }) {
       if (response.status === 200) {
         setOtpSent(true);
         setTimer(60);
-        toast.success("OTP sent to your email!");
+        alert("OTP sent to your email!");
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      alert(error.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }

@@ -15,9 +15,6 @@ import PhoneNumber from './components/PhoneNumber';
 import EmailId from "./components/EmailId"
 import StepThree from './components/StepThree';
 import ContactUs from './components/ContactUs';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 
 function App() {
   // 1. Initialize your form data object
@@ -54,11 +51,7 @@ function App() {
     { path: "/contactus", element: <ContactUs /> }
   ]);
 
-  return (
-    <>
-  <RouterProvider router={router} />
-<ToastContainer position="top-center" autoClose={3000} />
-</>);
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -4,7 +4,6 @@ import logo from "../assets/mlcoelogo1.svg";
 import { load } from '@cashfreepayments/cashfree-js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 function StepThree({ formData }) {
     const cashfreeRef = useRef(null);
@@ -14,7 +13,7 @@ function StepThree({ formData }) {
     useEffect(() => {
         const initializeSDK = async () => {
             cashfreeRef.current = await load({
-                mode: "production" // Live hone par "production" karein
+                mode: "sandbox" // Live hone par "production" karein
             });
         };
         initializeSDK();
@@ -22,7 +21,7 @@ function StepThree({ formData }) {
 
     const handlePayment = async () => {
         if (!formData.email || !formData.phoneNo) {
-           toast.error("Customer details missing. Please go back and fill the form.");
+            alert("Customer details missing. Please go back and fill the form.");
             return;
         }
 
@@ -30,11 +29,13 @@ function StepThree({ formData }) {
             setLoading(true);
             // 1. Backend par order create karna
             const response = await axios.post("http://localhost:7000/api/v1/student/create", {
-                customer_email: formData.email,
-                customer_phone: formData.phoneNo
+                name: formData.name,
+                email: formData.email,
+                phoneNo: formData.phoneNo
             }, { withCredentials: true });
 
-           const payment_session_id = response.data.data.payment_session_id;
+            const { payment_session_id } = response.data;
+
             if (!payment_session_id) {
                 throw new Error("No session ID received");
             }
@@ -50,7 +51,7 @@ function StepThree({ formData }) {
             }
         } catch (error) {
             console.error("Payment initialization failed:", error);
-            toast.error(error.response?.data?.message || "Could not initialize payment.");
+            alert(error.response?.data?.message || "Could not initialize payment.");
         } finally {
             setLoading(false);
         }

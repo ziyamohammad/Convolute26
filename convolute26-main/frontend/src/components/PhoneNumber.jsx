@@ -2,7 +2,6 @@ import React from 'react'
 import backArrow from "../assets/backarrow1.svg"
 import logo from "../assets/mlcoelogo1.svg"
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
 
 function PhoneNumber({ formData, updateData }) {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ function PhoneNumber({ formData, updateData }) {
     if (formData.phoneNo && formData.phoneNo.length >= 10) {
       navigate("/email");
     } else {
-      toast.error("Please enter a valid phone number");
+      alert("Please enter a valid phone number");
     }
   };
 

@@ -2,7 +2,6 @@ import React from "react";
 import backArrow from "../assets/backarrow1.svg";
 import logo from "../assets/mlcoelogo1.svg";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function Gender({ formData, updateData }) {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ function Gender({ formData, updateData }) {
     if (currentGender) {
       navigate("/studentid");
     } else {
-      toast.error("Please select your gender");
+      alert("Please select your gender");
     }
   };
 
