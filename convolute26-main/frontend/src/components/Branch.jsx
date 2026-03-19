@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../assets/backarrow1.svg";
 import logo from "../assets/mlcoelogo1.svg";
+import UI_CLASSES from '../utils/uiConstants';
+import showToast from '../utils/toast';
 
 function Branch({ formData, updateData }) {
   // Initialize state with existing value from formData if user comes back to this page
@@ -24,51 +26,44 @@ function Branch({ formData, updateData }) {
       updateData({ branch: selectedBranch });
       navigate("/gender");
     } else {
-      alert("Please select your branch");
+      showToast.error("Please select your branch");
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans overflow-x-hidden">
-      
+    <div className={UI_CLASSES.container.page}>
       {/* Header */}
-      <nav className="flex justify-between items-center px-6 pt-6 pb-4 md:px-20 md:pt-12">
-        <div className="md:hidden" onClick={() => navigate("/year")}>
-          <img src={backArrow} alt="back" className="w-9 h-9 cursor-pointer" />
-        </div>
-        <img 
-          src={logo} 
-          alt="logo" 
-          className="h-8 md:h-12 lg:h-14 w-auto object-contain"
-        />
+      <nav className={UI_CLASSES.nav.container}>
+        <img src={backArrow} alt="back" className="md:hidden w-10 h-10" onClick={() => navigate("/year")} />
+        <img src={logo} alt="logo" className={UI_CLASSES.nav.logo} />
         <button 
           onClick={() => navigate("/contactus")}
-          className="hidden md:block border border-gray-300 px-10 py-3 rounded-xl text-gray-700 font-medium text-lg"
+          className={UI_CLASSES.nav.contactButtonHiddenMobile}
         >
           Contact Us
         </button>
       </nav>
 
       {/* Content */}
-      <div className="flex-grow flex flex-col justify-center px-6 md:px-20 pb-16">
+      <div className="flex-1 min-h-0 flex flex-col justify-center px-4 md:px-20 pb-2 md:pb-10">
         <div className="max-w-5xl mx-auto w-full">
-          <h1 className="text-xl sm:text-2xl md:text-5xl font-semibold text-gray-900 mb-6 md:mb-10 text-center">
+          <h1 h2 className={UI_CLASSES.typography.heading1}>
             What’s your branch?
           </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-6">
             {branches.map((branch, index) => (
               <div
                 key={index}
                 onClick={() => handleBranchSelect(branch)}
-                className={`border rounded-xl p-4 md:p-5 text-base md:text-lg flex justify-between items-center cursor-pointer transition-all
+                className={`border rounded-[12px] p-2.5 sm:p-3 md:p-5 text-xs sm:text-sm md:text-lg flex justify-between items-center cursor-pointer transition-all
                 ${selectedBranch === branch ? "border-black bg-gray-50 ring-1 ring-black" : "border-gray-200"}`}
               >
-                <span className={selectedBranch === branch ? "font-semibold" : ""}>{branch}</span>
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all
+                <span className={selectedBranch === branch ? "font-semibold text-sm" : "text-sm"}>{branch}</span>
+                <div className={`w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all
                   ${selectedBranch === branch ? "border-black" : "border-gray-300"}`}>
                   {selectedBranch === branch && (
-                    <div className="w-2.5 h-2.5 bg-black rounded-full" />
+                    <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-black rounded-full" />
                   )}
                 </div>
               </div>
@@ -78,26 +73,23 @@ function Branch({ formData, updateData }) {
       </div>
 
       {/* Footer */}
-      <div className="px-6 pb-6 md:px-20 md:pb-16 mt-auto">
-        <div className="flex gap-3 md:gap-4 mb-6 md:mb-10">
-          <div className="h-1.5 flex-1 bg-black rounded-full"></div>
-          <div className="h-1.5 flex-1 bg-black rounded-full"></div>
-          <div className="h-1.5 flex-1 bg-gray-200 rounded-full"></div>
+      <div className={UI_CLASSES.footer.container}>
+        <div className={UI_CLASSES.progressBar.container}>
+          <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barActive}`}></div>
+          <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barInactive}`}></div>
+          <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barInactive}`}></div>
         </div>
 
-        <div className="flex justify-between items-center">
-          {/* Back button - Hidden on mobile, visible on desktop */}
+        <div className={UI_CLASSES.footer.buttonGroup}>
           <button 
             onClick={() => navigate("/year")}
-            className="hidden md:block px-6 py-2 md:px-20 md:py-3 border border-gray-300 rounded-xl font-medium text-gray-700 text-sm md:text-lg hover:bg-gray-50 transition-all"
+            className={UI_CLASSES.button.secondary}
           >
             Back
           </button>
-          
-          {/* Next button - Full width on mobile */}
           <button 
             onClick={handleNext}
-            className="w-full md:w-auto bg-black text-white px-6 py-2 md:px-24 md:py-3 rounded-xl text-sm md:text-lg font-medium hover:bg-gray-900 active:scale-95 transition-all"
+            className={UI_CLASSES.button.primary}
           >
             Next
           </button>

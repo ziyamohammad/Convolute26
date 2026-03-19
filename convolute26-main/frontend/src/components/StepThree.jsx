@@ -4,6 +4,8 @@ import logo from "../assets/mlcoelogo1.svg";
 import { load } from '@cashfreepayments/cashfree-js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import UI_CLASSES from '../utils/uiConstants';
+import showToast from '../utils/toast';
 
 function StepThree({ formData }) {
     const cashfreeRef = useRef(null);
@@ -13,7 +15,7 @@ function StepThree({ formData }) {
     useEffect(() => {
         const initializeSDK = async () => {
             cashfreeRef.current = await load({
-                mode: "sandbox" // Live hone par "production" karein
+                mode: "production" // Live hone par "production" karein
             });
         };
         initializeSDK();
@@ -21,17 +23,16 @@ function StepThree({ formData }) {
 
     const handlePayment = async () => {
         if (!formData.email || !formData.phoneNo) {
-            alert("Customer details missing. Please go back and fill the form.");
+            showToast.error("Customer details missing. Please go back and fill the form.");
             return;
         }
 
         try {
             setLoading(true);
             // 1. Backend par order create karna
-            const response = await axios.post("http://localhost:7000/api/v1/student/create", {
-                name: formData.name,
-                email: formData.email,
-                phoneNo: formData.phoneNo
+            const response = await axios.post("/api/v1/student/create", {
+                customer_email: formData.email,
+                customer_phone: formData.phoneNo
             }, { withCredentials: true });
 
             const { payment_session_id } = response.data;
@@ -51,61 +52,59 @@ function StepThree({ formData }) {
             }
         } catch (error) {
             console.error("Payment initialization failed:", error);
-            alert(error.response?.data?.message || "Could not initialize payment.");
+            showToast.error(error.response?.data?.message || "Could not initialize payment.");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-white font-sans">
+        <div className={UI_CLASSES.container.page}>
             {/* Navigation Bar */}
-            <nav className="flex justify-between items-center px-6 pt-10 pb-6 md:px-20 md:pt-16">
-                <div className="md:hidden" onClick={() => navigate(-1)}>
-                    <img src={backArrow} alt="back" className="w-10 h-10 cursor-pointer" />
-                </div>
-                <img src={logo} alt="logo" className="h-10 md:h-12" />
-                <button className="hidden md:block border border-gray-300 px-10 py-3 rounded-xl text-gray-700 font-medium text-lg hover:bg-gray-50 transition-all">
+            <nav className={UI_CLASSES.nav.container}>
+                <img src={backArrow} alt="back" className="md:hidden w-10 h-10" onClick={() => navigate(-1)} />
+                <img src={logo} alt="logo" className={UI_CLASSES.nav.logo} />
+                <button className={UI_CLASSES.nav.contactButtonHiddenMobile}>
                     Contact Us
                 </button>
             </nav>
 
             {/* Main Content */}
-            <div className="flex-grow flex flex-col justify-center px-8 md:px-20">
-                <div className="max-w-4xl">
-                    <p className="text-gray-500 text-lg md:text-xl font-medium mb-2">Step 3</p>
-                    <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 mb-6">
+            <div className={UI_CLASSES.container.mainContent}>
+                <div className={`${UI_CLASSES.container.maxWidth} md:max-w-2xl md:mx-auto`}>
+                    <p className={`${UI_CLASSES.typography.stepLabel} md:text-left`}>Step 3</p>
+                    <h1 className={`${UI_CLASSES.typography.heading1} md:text-left`}>
                         Complete your registration
                     </h1>
-                    <p className="text-gray-500 text-lg md:text-2xl leading-relaxed max-w-3xl">
+                    <p className={`${UI_CLASSES.typography.subtitleLg} leading-tight md:text-left`}>
                         Complete your registration by making a payment of <span className="text-black font-bold">₹100</span>. This will confirm your participation.
                     </p>
                 </div>
             </div>
 
             {/* Footer Section */}
-            <div className="px-6 pb-10 md:px-20 md:pb-16">
+            <div className={UI_CLASSES.footer.container}>
                 {/* Progress Bar */}
-                <div className="flex gap-4 mb-10">
-                    <div className="h-1.5 flex-1 bg-black rounded-full"></div>
-                    <div className="h-1.5 flex-1 bg-black rounded-full"></div>
-                    <div className="h-1.5 flex-1 bg-black rounded-full"></div>
+                <div className={UI_CLASSES.progressBar.container}>
+                    <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barActive}`}></div>
+                    <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barActive}`}></div>
+                    <div className={`${UI_CLASSES.progressBar.bar} ${UI_CLASSES.progressBar.barActive}`}></div>
                 </div>
 
-                <div className="flex justify-between items-center">
-                    {/* Back Button - Hidden on mobile, visible on desktop */}
+                <div className={UI_CLASSES.footer.buttonGroup}>
+                    {/* Back Button */}
                     <button 
                         onClick={() => navigate(-1)}
-                        className="hidden md:block px-10 py-3 md:px-20 border border-gray-300 rounded-xl font-medium text-gray-700 text-lg hover:bg-gray-50 transition-all"
+                        className={UI_CLASSES.button.secondary}
                     >
                         Back
                     </button>
 
-                    {/* Pay Now Button - Full width on mobile */}
+                    {/* Pay Now Button */}
                     <button 
                         onClick={handlePayment} 
                         disabled={loading}
-                        className="w-full md:w-auto bg-black text-white px-10 py-3 md:px-24 rounded-xl text-lg font-medium hover:bg-gray-900 active:scale-95 transition-all disabled:bg-gray-400"
+                        className={UI_CLASSES.button.primary}
                     >
                         {loading ? "Processing..." : "Pay Now"}
                     </button>

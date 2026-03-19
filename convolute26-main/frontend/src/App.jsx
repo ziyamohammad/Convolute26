@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import all your components
 import Branch from "./components/Branch"
@@ -46,12 +48,27 @@ function App() {
     { path: "/living", element: <Living formData={formData} updateData={updateFormData} /> },
     { path: "/steptwo", element: <StepTwo /> },
     { path: "/phone", element: <PhoneNumber formData={formData} updateData={updateFormData} /> },
-    { path: "/email", element: <EmailId formData={formData} updateData={updateFormData} /> },
-    { path: "/stepthree", element: <StepThree formData={formData} /> },
+    { path: "/verify", element: <EmailId formData={formData} updateData={updateFormData} /> },
+    { path: "/payment", element: <StepThree formData={formData} /> },
     { path: "/contactus", element: <ContactUs /> }
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
