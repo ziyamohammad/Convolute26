@@ -22,9 +22,13 @@ function LandingPage() {
             </div>
 
             {/* Mobile-only Poster Box (Hidden on Desktop) */}
-            <div className="w-full max-w-[420px] sm:max-w-[300px] h-64 sm:h-72 bg-gray-300 rounded-[20px] overflow-hidden mb-5 md:hidden mx-auto">
-              <img src="" alt="" className="w-full h-full object-cover" />
-            </div>
+            <div className="w-full max-w-[420px] h-[300px] mx-auto rounded-[20px] overflow-hidden bg-black flex items-center justify-center mb-5 md:hidden">
+  <img 
+    src="/poster.png" 
+    alt="poster" 
+    className="w-[100%] h-[300px] "
+  />
+</div>
 
             {/* Text Content */}
             <div className="mt-0">
@@ -61,9 +65,9 @@ function LandingPage() {
 
         {/* Desktop-only Poster Box Section */}
         <div className="hidden md:flex md:w-[45%] flex-shrink-0 items-center justify-center">
-          <div className="w-full h-full max-h-[640px] bg-gray-200 rounded-[32px] overflow-hidden">
+          <div className="w-full h-[550px] max-h-[640px] bg-gray-200 rounded-[32px] overflow-hidden">
             {/* Image tag for your poster */}
-            <img src="" alt="" className="w-full h-full object-cover" />
+            <img src="/poster.png" alt="poster" className="w-[100%] h-[550px] " />
           </div>
         </div>
 
