@@ -1,6 +1,8 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import axios from "axios";
 import nodemailer from "nodemailer";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponce.js";
 
 const paymentcontroller = asyncHandler(async (req, res) => {
   try {
@@ -69,11 +71,28 @@ const carddetail = asyncHandler(async (req, res) => {
     );
     const orderData = response.data;
 
-     if (orderData.order_status === "PAID") {
+  return res.status(200).json({
+      success: true,
+      data: orderData
+    });
 
-      const email = orderData.customer_details.customer_email;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching order details"
+    });
+  }
+});
 
-      const transporter = nodemailer.createTransport({
+export const mail = asyncHandler(async(req,res)=>{
+  const {name,email} = req.body
+
+  if(!name|| !email){
+    throw new ApiError(400,"Pleased fill all the ecessary fields")
+  }
+
+   const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
@@ -186,19 +205,11 @@ const carddetail = asyncHandler(async (req, res) => {
 
 </div>`,
      });
-    }
-  return res.status(200).json({
-      success: true,
-      data: orderData
-    });
 
-  } catch (error) {
-    console.error(error.response?.data || error.message);
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching order details"
-    });
-  }
-});
+     res.status(200)
+     .json(new ApiResponse(200,"Payment sone successfully"))
+
+
+})
 
 export {paymentcontroller,carddetail}
