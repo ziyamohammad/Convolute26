@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/src/assets/fonts/Gilroy-Light.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/src/assets/fonts/Gilroy-Light.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/src/assets/fonts/Gilroy-Light.ttf") format("truetype");
+  font-weight: 700;
+}
 html,
 body,
 #root {
@@ -7,7 +25,11 @@ body,
 	width: 100%;
 	overflow: hidden;
 }
+.gilroy {
+  font-family: "Gilroy", sans-serif;
+}
 
 body {
 	margin: 0;
+	
 }

@@ -36,7 +36,7 @@ function LandingPage() {
                 Convolute’26
               </h1>
 
-              <p className="text-gray-500 mt-2 md:mt-5 text-sm sm:text-base md:text-xl leading-relaxed max-w-xl">
+              <p className="text-gray-500 mt-2 md:mt-5 text-sm sm:text-base md:text-xl leading-relaxed gilroy max-w-xl">
                 Step in and experience something meaningful,
                 crafted for those who explore.
               </p>
