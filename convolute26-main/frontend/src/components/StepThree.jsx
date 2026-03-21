@@ -42,6 +42,12 @@ function StepThree({ formData }) {
     throw new Error("No session ID received");
           }
 
+          const semdmail = await axios.post("/api/v1/student/sendmail",{
+            email:formData.email,
+            name:formData.name
+          },{withCredentials:true})
+          console.log(semdmail)
+
             // 2. Cashfree Checkout launch karna
             const checkoutOptions = {
                 paymentSessionId: payment_session_id,
