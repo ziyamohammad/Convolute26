@@ -8,7 +8,7 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-dvh max-h-dvh overflow-hidden bg-white flex items-center justify-center font-sans">
+    <div className="min-h-screen bg-white flex items-center justify-center font-sans">
       
       <div className="w-full h-full max-w-sm md:max-w-none bg-white px-5 pt-5 pb-4 md:px-10 md:pt-10 md:pb-8 flex flex-col md:flex-row transition-all duration-300">
         
@@ -22,11 +22,11 @@ function LandingPage() {
             </div>
 
             {/* Mobile-only Poster Box (Hidden on Desktop) */}
-            <div className="w-full max-w-[420px] h-[350px] mx-auto rounded-[20px] overflow-hidden bg-black flex items-center justify-center mb-5 md:hidden">
+            <div className="w-full max-w-[420px] mx-auto rounded-[20px] overflow-hidden bg-black mb-5 md:hidden">
   <img 
     src="/poster.jpeg" 
     alt="poster" 
-    className="w-[100%] h-[350px] "
+    className="w-full h-auto object-contain"
   />
 </div>
 
@@ -65,10 +65,13 @@ function LandingPage() {
 
         {/* Desktop-only Poster Box Section */}
         <div className="hidden md:flex md:w-[45%] flex-shrink-0 items-center justify-center">
-          <div className="w-full h-[650px] max-h-[640px] bg-gray-200 rounded-[32px] overflow-hidden">
-            {/* Image tag for your poster */}
-            <img src="/poster.jpeg" alt="poster" className="w-[100%] h-[650px] " />
-          </div>
+          <div className="w-full max-w-[500px] rounded-[32px] overflow-hidden bg-gray-200">
+  <img 
+    src="/poster.jpeg" 
+    alt="poster" 
+    className="w-full h-auto object-contain"
+  />
+</div>
         </div>
 
       </div>
