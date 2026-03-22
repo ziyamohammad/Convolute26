@@ -3,7 +3,7 @@
 export const UI_CLASSES = {
   // Container Classes
   container: {
-    page: "h-dvh max-h-dvh overflow-hidden flex flex-col bg-white font-sans",
+    page: "h-dvh max-h-dvh overflow-hidden flex flex-col bg-white font-gilroy",
     mainContent: "flex-1 min-h-0 flex flex-col justify-center px-4 sm:px-6 md:px-20",
     centerContent: "flex-1 min-h-0 flex flex-col justify-center items-start md:items-center px-4 sm:px-6 md:px-20",
     maxWidth: "max-w-5xl md:max-w-6xl mx-auto w-full",
@@ -22,11 +22,11 @@ export const UI_CLASSES = {
 
   // Typography Classes
   typography: {
-    stepLabel: "text-gray-500 text-xs sm:text-sm md:text-base text-left md:text-center font-medium mb-1 md:mb-2",
-    heading1: "text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-4 md:mb-8 text-left md:text-center leading-tight",
-    heading2: "text-2xl md:text-3xl font-semibold text-gray-900 mb-6 md:mb-8",
-    subtitle: "text-base md:text-lg text-gray-600 leading-relaxed",
-    subtitleLg: "text-sm sm:text-base md:text-xl text-gray-600 leading-relaxed max-w-2xl text-left md:text-center",
+    stepLabel: "text-gray-500 text-xs sm:text-sm md:text-base text-left md:text-center font-medium mb-1 md:mb-2 font-gilroy",
+    heading1: "text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-4 md:mb-8 text-left md:text-center font-gilroy leading-tight",
+    heading2: "text-2xl md:text-3xl font-semibold text-gray-900 mb-6 md:mb-8 font-gilroy",
+    subtitle: "text-base md:text-lg text-gray-600 leading-relaxed font-gilroy",
+    subtitleLg: "text-sm sm:text-base md:text-xl text-gray-600 leading-relaxed font-gilroy max-w-2xl text-left md:text-center",
   },
 
   // Button Classes
@@ -41,7 +41,7 @@ export const UI_CLASSES = {
   // Input Classes
   input: {
     base: "w-full border border-gray-300 rounded-[12px] px-4 md:px-6 py-3 md:py-4 text-sm md:text-lg outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors",
-    text: "w-full max-w-md border border-gray-300 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-base md:text-lg text-left md:text-center outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors",
+    text: "w-full max-w-md border border-gray-300 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-base md:text-lg text-left md:text-center outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors font-gilroy",
     textarea: "w-full border border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors",
   },
 

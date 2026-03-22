@@ -24,6 +24,7 @@ body,
 	height:auto;
 	width: 100%;
 	overflow: auto;
+  font-family: "Gilroy", sans-serif;
 }
 .gilroy {
   font-family: "Gilroy", sans-serif;

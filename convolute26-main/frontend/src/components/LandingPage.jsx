@@ -8,13 +8,13 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white font-gilroy overflow-y-auto">
+    <div className="min-h-screen bg-white font-gilroy justify-center align-center overflow-y-auto">
       
       
      <div className="w-full max-w-sm md:max-w-none mx-auto bg-white px-5 pt-5 pb-4 md:px-10 md:pt-10 md:pb-8 flex flex-col md:flex-row">
         
         {/* Main Content Area (Text & Logo) */}
-        <div className="flex-1 min-h-0 flex flex-col justify-between md:pr-12">
+        <div className="flex-1 min-h-0 flex flex-col justify-around md:pr-12">
           
           <div>
             {/* Logo */}
