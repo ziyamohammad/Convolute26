@@ -8,9 +8,10 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center font-sans">
+    <div className="min-h-screen bg-white font-gilroy overflow-y-auto">
       
-      <div className="w-full h-full max-w-sm md:max-w-none bg-white px-5 pt-5 pb-4 md:px-10 md:pt-10 md:pb-8 flex flex-col md:flex-row transition-all duration-300">
+      
+     <div className="w-full max-w-sm md:max-w-none mx-auto bg-white px-5 pt-5 pb-4 md:px-10 md:pt-10 md:pb-8 flex flex-col md:flex-row">
         
         {/* Main Content Area (Text & Logo) */}
         <div className="flex-1 min-h-0 flex flex-col justify-between md:pr-12">
@@ -24,7 +25,7 @@ function LandingPage() {
             {/* Mobile-only Poster Box (Hidden on Desktop) */}
             <div className="w-full max-w-[420px] mx-auto rounded-[20px] overflow-hidden bg-black mb-5 md:hidden">
   <img 
-    src="/poster.jpeg" 
+    src="/poster.png" 
     alt="poster" 
     className="w-full h-auto object-contain"
   />
@@ -67,7 +68,7 @@ function LandingPage() {
         <div className="hidden md:flex md:w-[45%] flex-shrink-0 items-center justify-center">
           <div className="w-full max-w-[500px] rounded-[32px] overflow-hidden bg-gray-200">
   <img 
-    src="/poster.jpeg" 
+    src="/poster.png" 
     alt="poster" 
     className="w-full h-auto object-contain"
   />
@@ -75,6 +76,7 @@ function LandingPage() {
         </div>
 
       </div>
+    
     </div>
   );
 }

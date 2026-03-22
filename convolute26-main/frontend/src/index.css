@@ -21,9 +21,9 @@
 html,
 body,
 #root {
-	height: 100%;
+	height:auto;
 	width: 100%;
-	overflow: hidden;
+	overflow: auto;
 }
 .gilroy {
   font-family: "Gilroy", sans-serif;
