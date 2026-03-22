@@ -10,23 +10,23 @@ function LandingPage() {
   return (
     <div className="h-dvh max-h-dvh overflow-hidden bg-white flex items-center justify-center font-sans">
       
-      <div className="w-full h-full max-w-sm md:max-w-none bg-white px-5 pt-5 pb-4 md:px-16 md:pt-10 md:pb-8 flex flex-col md:flex-row transition-all duration-300">
+      <div className="w-full h-full max-w-sm md:max-w-none bg-white px-5 pt-5 pb-4 md:px-10 md:pt-10 md:pb-8 flex flex-col md:flex-row transition-all duration-300">
         
         {/* Main Content Area (Text & Logo) */}
         <div className="flex-1 min-h-0 flex flex-col justify-between md:pr-12">
           
           <div>
             {/* Logo */}
-            <div className="mb-6 md:mb-12">
+            <div className="mb-3 md:mb-12">
                <img src={logo} alt="Machine Learning Centre of Excellence" className="h-8 md:h-12 w-auto object-contain" />
             </div>
 
             {/* Mobile-only Poster Box (Hidden on Desktop) */}
-            <div className="w-full max-w-[420px] h-[300px] mx-auto rounded-[20px] overflow-hidden bg-black flex items-center justify-center mb-5 md:hidden">
+            <div className="w-full max-w-[420px] h-[350px] mx-auto rounded-[20px] overflow-hidden bg-black flex items-center justify-center mb-5 md:hidden">
   <img 
     src="/poster.jpeg" 
     alt="poster" 
-    className="w-[100%] h-[300px] "
+    className="w-[100%] h-[350px] "
   />
 </div>
 
@@ -65,9 +65,9 @@ function LandingPage() {
 
         {/* Desktop-only Poster Box Section */}
         <div className="hidden md:flex md:w-[45%] flex-shrink-0 items-center justify-center">
-          <div className="w-full h-[550px] max-h-[640px] bg-gray-200 rounded-[32px] overflow-hidden">
+          <div className="w-full h-[650px] max-h-[640px] bg-gray-200 rounded-[32px] overflow-hidden">
             {/* Image tag for your poster */}
-            <img src="/poster.jpeg" alt="poster" className="w-[100%] h-[550px] " />
+            <img src="/poster.jpeg" alt="poster" className="w-[100%] h-[650px] " />
           </div>
         </div>
 
