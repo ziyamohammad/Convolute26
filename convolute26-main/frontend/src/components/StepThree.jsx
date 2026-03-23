@@ -30,7 +30,7 @@ function StepThree({ formData }) {
         try {
             setLoading(true);
             // 1. Backend par order create karna
-            const response = await axios.post("http://localhost:7000/api/v1/student/create", {
+            const response = await axios.post("/api/v1/student/create", {
                 customer_email: formData.email,
                 customer_phone: formData.phoneNo
             }, { withCredentials: true });
