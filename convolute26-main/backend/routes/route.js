@@ -17,6 +17,6 @@ router.route("/verify").post( slow,verifyStudentRegistration);
 router.route("/resendotp").get(resendOTP);
 router.route("/verifyCaptcha").post(verifyCaptcha);
 router.route("/create").post(paymentcontroller);
-router.get("/finalize", finalizeRegistration);
+router.route("/finalize").post(finalizeRegistration);
 
 export default router
