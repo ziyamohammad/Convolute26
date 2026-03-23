@@ -3,13 +3,14 @@ import axios from "axios";
 import nodemailer from "nodemailer";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponce.js";
+import { Student } from "../models/studentModel.js";
 
 const paymentcontroller = asyncHandler(async (req, res) => {
   try {
     const {  customer_email, customer_phone } = req.body;
 
       const order_id = "order_" + Date.now();
-        const amount = 100; // 
+        const amount = 1; // 
         const customer_id = "cust_" + customer_phone;
       
     const response = await axios.post(
@@ -22,8 +23,12 @@ const paymentcontroller = asyncHandler(async (req, res) => {
           customer_id,
           customer_email,
           customer_phone
-        }
+        },
+        order_meta: {
+      return_url: "https://mlcoe.tech/payment-success?order_id={order_id}"
+    },
       },
+      
       {
         headers: {
           "Content-Type": "application/json",
@@ -48,51 +53,34 @@ const paymentcontroller = asyncHandler(async (req, res) => {
   }
 });
 
-const carddetail = asyncHandler(async (req, res) => {
-  try {
-    const { order_id } = req.params;
+export const finalizeRegistration = asyncHandler(async (req, res) => {
+  const { order_id } = req.body;
 
-    if (!order_id) {
-        return res.status(400).json({
-            success: false,
-            message: "order_id is required"
-        });
-    }
-
-    const response = await axios.get(
-      `${process.env.CASHFREE_BASE_URL}/orders/${order_id}`,
-      {
-        headers: {
-          "x-api-version": "2022-09-01",
-          "x-client-id": process.env.CASHFREE_APP_ID,
-          "x-client-secret": process.env.CASHFREE_SECRET_KEY
-        }
+  const response = await axios.get(
+    `${process.env.CASHFREE_BASE_URL}/orders/${order_id}`,
+    {
+      headers: {
+        "x-api-version": "2022-09-01",
+        "x-client-id": process.env.CASHFREE_APP_ID,
+        "x-client-secret": process.env.CASHFREE_SECRET_KEY
       }
-    );
-    const orderData = response.data;
+    }
+  );
 
-  return res.status(200).json({
-      success: true,
-      data: orderData
-    });
-
-  } catch (error) {
-    console.error(error.response?.data || error.message);
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching order details"
-    });
-  }
-});
-
-export const mail = asyncHandler(async(req,res)=>{
-  const {name,email} = req.body
-
-  if(!name|| !email){
-    throw new ApiError(400,"Pleased fill all the ecessary fields")
+  if (response.data.order_status !== "PAID") {
+    throw new ApiError(400, "Payment not successful");
   }
 
-   const transporter = nodemailer.createTransport({
+  if (!req.session.userData) {
+    throw new ApiError(400, "Session expired");
+  }
+
+  const userData = req.session.userData;
+
+  
+  const student = await Student.create(userData);
+
+    const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
@@ -104,9 +92,9 @@ export const mail = asyncHandler(async(req,res)=>{
 
       await transporter.sendMail({
     from: `"Registration Team" <${process.env.EMAIL_USER}>`,
-    to: email,
+    to: userData.email,
     subject: "Welcome to Convolute '26",
-    text: `Hello ${name}, your registration for Convolute '26 has been successfully confirmed`,
+    text: `Hello ${userData.name}, your registration for Convolute '26 has been successfully confirmed`,
     html: `<div style="background:#000;padding:40px 10px;font-family:Arial,sans-serif">
 
   <div style="max-width:620px;margin:auto;background:#0a0a0a;border-radius:12px;overflow:hidden;border:1px solid #1f1f1f">
@@ -137,7 +125,7 @@ export const mail = asyncHandler(async(req,res)=>{
       </h2>
 
       <p style="font-size:15px;line-height:1.6">
-      Hello <b>${name}</b>, your registration for 
+      Hello <b>${userData.name}</b>, your registration for 
       <span style="color:#d946ef;font-weight:bold">Convolute '26</span> 
       has been successfully confirmed.
       </p>
@@ -206,10 +194,27 @@ export const mail = asyncHandler(async(req,res)=>{
 </div>`,
      });
 
-     res.status(200)
-     .json(new ApiResponse(200,"Payment sone successfully"))
+  req.session.destroy();
+
+  res.status(200).json({
+    success: true,
+    data: student
+  });
+});
+
+// export const mail = asyncHandler(async(req,res)=>{
+//   const {name,email} = req.body
+
+//   if(!name|| !email){
+//     throw new ApiError(400,"Pleased fill all the ecessary fields")
+//   }
 
 
-})
 
-export {paymentcontroller,carddetail}
+//      res.status(200)
+//      .json(new ApiResponse(200,"Payment sone successfully"))
+
+
+// })
+
+export {paymentcontroller}

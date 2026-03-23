@@ -96,10 +96,6 @@ const resisterStudent = asyncHandler(async (req, res) => {
     year,
     ip: userIp,
   };
-  console.log(req.session.otp);
-  console.log(req.session.userData);
-  console.log(req.session.otpExpiry);
-
 
   await sendOtp({ name, email, otp });
 
@@ -111,9 +107,6 @@ const resisterStudent = asyncHandler(async (req, res) => {
 
 const verifyStudentRegistration = asyncHandler(async (req, res) => {
   const { otp } = req.body;
-  console.log(req.session.otp);
-  console.log
-  console.log(req.session.userData)
   if (!req.session.otp ) {
     throw new ApiError(400, "OTP session expired. Please restart registration");
   }
@@ -133,13 +126,12 @@ const verifyStudentRegistration = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid OTP");
   }
 
-  const student = await Student.create(req.session.userData);
+  // const student = await Student.create(req.session.userData);
 
-  req.session.destroy();
 
   return res
     .status(201)
-    .json(new ApiResponse(201, student, "Student registered successfully"));
+    .json(new ApiResponse(201,null, "OTP verified Proceed to Payment"));
 });
 
 
