@@ -30,7 +30,7 @@ function StepThree({ formData }) {
         try {
             setLoading(true);
             // 1. Backend par order create karna
-            const response = await axios.post("/api/v1/student/create", {
+            const response = await axios.post("http://localhost:7000/api/v1/student/create", {
                 customer_email: formData.email,
                 customer_phone: formData.phoneNo
             }, { withCredentials: true });
@@ -42,11 +42,11 @@ function StepThree({ formData }) {
     throw new Error("No session ID received");
           }
 
-          const semdmail = await axios.post("/api/v1/student/sendmail",{
-            email:formData.email,
-            name:formData.name
-          },{withCredentials:true})
-          console.log(semdmail)
+        //   const semdmail = await axios.post("/api/v1/student/sendmail",{
+        //     email:formData.email,
+        //     name:formData.name
+        //   },{withCredentials:true})
+        //   console.log(semdmail)
 
             // 2. Cashfree Checkout launch karna
             const checkoutOptions = {

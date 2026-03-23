@@ -17,6 +17,7 @@ import PhoneNumber from './components/PhoneNumber';
 import EmailId from "./components/EmailId"
 import StepThree from './components/StepThree';
 import ContactUs from './components/ContactUs';
+import PaymentSuccess from './components/payment_success';
 
 function App() {
   // 1. Initialize your form data object
@@ -36,7 +37,7 @@ function App() {
     setFormData((prev) => ({ ...prev, ...newData }));
   };
 
-  // 3. Define the router inside the component to access state/functions
+  
   const router = createBrowserRouter([
     { path: "/", element: <LandingPage /> },
     { path: "/secondpage", element: <SecondPage /> },
@@ -50,7 +51,8 @@ function App() {
     { path: "/phone", element: <PhoneNumber formData={formData} updateData={updateFormData} /> },
     { path: "/verify", element: <EmailId formData={formData} updateData={updateFormData} /> },
     { path: "/payment", element: <StepThree formData={formData} /> },
-    { path: "/contactus", element: <ContactUs /> }
+    { path: "/contactus", element: <ContactUs /> },
+    { path: "/payment-success", element: <PaymentSuccess /> }
   ]);
 
   return (
